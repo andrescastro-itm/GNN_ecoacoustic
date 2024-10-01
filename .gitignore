@@ -1,0 +1,3 @@
+**/*.ipynb_checkpoints/
+Pruebas.ipynb
+GNN_matrices_test.py
