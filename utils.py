@@ -3,6 +3,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import seaborn as sns
 import torch
+import scipy.sparse
 
 from torch_geometric.data import Data
 from torch_geometric.loader import DataLoader
@@ -103,3 +104,24 @@ def plot_distance_matrix_heatmap(matrix, title="Distance Matrix Heatmap"):
     plt.xlabel("Coordinate Index")
     plt.ylabel("Coordinate Index")
     plt.show()
+
+def edge_index_to_adjacency(edge_index):
+    """
+    Convert an edge_index to an adjacency matrix.
+    
+    Args:
+    edge_index (np.ndarray): A 2D numpy array representing the edges.
+
+    Returns:
+    np.ndarray: A NxN tensor representing the adjacency matrix.
+    """
+    # Convert to adjacency matrix
+    num_nodes = edge_index.max().item() + 1
+    adj_matrix = scipy.sparse.coo_matrix((torch.ones(edge_index.size(1)), edge_index), shape=(num_nodes, num_nodes)).toarray()
+    
+    return adj_matrix
+
+
+
+
+
