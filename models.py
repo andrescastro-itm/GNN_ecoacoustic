@@ -20,7 +20,7 @@ class MatrixGCN(torch.nn.Module):
         return x
 
 class MatrixGAT(torch.nn.Module):
-  def __init__(self, in_channels, hidden_channels, embedding_dim, heads=10):
+  def __init__(self, in_channels, hidden_channels, embedding_dim, heads=1):
     super().__init__()
     self.conv1d = torch.nn.Conv1d(1, 64, 24, stride=24)
     self.gat1 = GATv2Conv(in_channels, hidden_channels, heads=heads)
