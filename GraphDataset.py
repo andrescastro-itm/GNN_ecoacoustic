@@ -21,7 +21,7 @@ class MyDataset(Dataset):
     
     def __getitem__(self, index):
         archivo = index #qué archivo usar
-        print(index)
+        # print(index)
         ruta = self.lista[archivo]
         name = '_'.join(ruta.split('/'))
         print(name)
@@ -64,11 +64,11 @@ class MyDataset(Dataset):
 
             n_feat = 60
 
-        print(f'{file_path=}')        
+        # print(f'{file_path=}')        
         
         df = pd.read_csv(f'{self.GLOB_PATH}/Conv1D_ecological_RZ/ZamuroCaract/CSVs/{name}.csv', index_col=0)
         df.index = pd.Series(df.index.map(parser.parse))
-        print(f'{n_feat=}')
+        # print(f'{n_feat=}')
 
         L = np.arange(df.shape[0])
         Data1 = torch.empty((0,24,n_feat)) 
@@ -81,7 +81,7 @@ class MyDataset(Dataset):
                 if (Hour >= 0 and Hour<=9):
                     d += 1
                 date = self.dates[d]
-                print(Hour)
+                # print(Hour)
                 # print(df[(df.index.date == pd.to_datetime(date).date()) &
                 #          (df.index.hour == Hour)])
                 Sel = (df.index.date == pd.to_datetime(date).date()) & (df.index.hour == Hour)
@@ -95,7 +95,7 @@ class MyDataset(Dataset):
                     fila1 = panns_tensor[indices_datos,...].mean(0)
                 elif self.caract == 'AI':
                     fila1 = torch.tensor(df_feat.iloc[indices_datos,:].mean(0).values.astype('float'))
-                    print(df.iloc[indices_datos,:])
+                    # print(df.iloc[indices_datos,:])
                 
                 # if (fila1.shape[0] != 4):
                 #     fila1 = torch.cat((fila1[0].unsqueeze(0), fila1))
