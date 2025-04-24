@@ -1,7 +1,8 @@
 **/*.ipynb_checkpoints/
 **/__pycache__
 **/results
-**/models
+**/modelsGVAE
+**/modelsGVAE_semi
 Pruebas.ipynb
 GNN_matrices_test.py
 
