@@ -266,11 +266,11 @@ class MatrixGATVAE_MT(torch.nn.Module):
 
         # Clasificador
         self.classifier = torch.nn.Sequential(
-            torch.nn.Linear(latent_dim, num_classes),
-            # torch.nn.Linear(latent_dim, int(latent_dim/4)),
-            # torch.nn.ReLU(),
-            # torch.nn.Dropout(0.3),  # Agregamos dropout para mejor generalización
-            # torch.nn.Linear(int(latent_dim/4), num_classes),
+            # torch.nn.Linear(latent_dim, num_classes),
+            torch.nn.Linear(latent_dim, max(8,int(latent_dim/4))),
+            torch.nn.ReLU(),
+            torch.nn.Dropout(0.3),  # Agregamos dropout para mejor generalización
+            torch.nn.Linear(max(8,int(latent_dim/4)), num_classes),
         )
         
     def encode(self, x, edge_index):
@@ -344,7 +344,7 @@ class MatrixGATVAE_MT(torch.nn.Module):
         # We can add class weights if the graph is sparse
         # print(f"{adj_reconstruction.double()=}")
         # print(f"{true_adj.double()=}")
-        adj_loss = F.binary_cross_entropy(adj_reconstruction.double(), true_adj.double())
+        adj_loss = F.mse_loss(adj_reconstruction.double(), true_adj.double())
         
         # KL Divergence loss
         kl_loss = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
@@ -383,11 +383,11 @@ class MatrixGCNVAE_MT(torch.nn.Module):
 
         # Clasificador
         self.classifier = torch.nn.Sequential(
-            torch.nn.Linear(latent_dim, num_classes),
-            # torch.nn.Linear(latent_dim, int(latent_dim/4)),
-            # torch.nn.ReLU(),
-            # torch.nn.Dropout(0.3),  # Agregamos dropout para mejor generalización
-            # torch.nn.Linear(int(latent_dim/4), num_classes),
+            # torch.nn.Linear(latent_dim, num_classes),
+            torch.nn.Linear(latent_dim, max(8,int(latent_dim/4))),
+            torch.nn.ReLU(),
+            torch.nn.Dropout(0.3),  # Agregamos dropout para mejor generalización
+            torch.nn.Linear(max(8,int(latent_dim/4)), num_classes),
         )
         
     def encode(self, x, edge_index):
@@ -461,7 +461,7 @@ class MatrixGCNVAE_MT(torch.nn.Module):
         # We can add class weights if the graph is sparse
         # print(f"{adj_reconstruction.double()=}")
         # print(f"{true_adj.double()=}")
-        adj_loss = F.binary_cross_entropy(adj_reconstruction.double(), true_adj.double())
+        adj_loss = F.mse_loss(adj_reconstruction.double(), true_adj.double())
         
         # KL Divergence loss
         kl_loss = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
