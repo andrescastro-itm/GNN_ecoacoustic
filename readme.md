@@ -19,7 +19,7 @@ pip install -r requirements.txt
   - Interpretability results using the Eigen-CAM technique for all recorders
 - `old_stuff/`
   - It contains some code used in preliminary experiments, where initial ideas were explored.
-- `GraphDataset.py`, `models.py`, and `modelsCAM.py`: Dataset module for generating temporal blocks, model classes, and model classes with interpretability, respectively.
+- `GraphDataset.py`, `models.py`, `utils.py` and `modelsCAM.py`: Dataset module for generating temporal blocks, model classes, and model classes with interpretability, respectively.
 - `GVAE_semi_eval_post.ipynb`, `GVAE_train_multits.ipynb`, `GVAE_VGGish_CAMtests.ipynb`, and `GVAE_VGGish_tests.ipynb`: notebooks for training, evaluation, and interpretation of Graph VAE models.
 
 *Remark*: Due to the size of the files, the data features and trained models are not hosted in this repository. If required, they will be shared upon reasonable request.
